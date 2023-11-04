@@ -2,26 +2,35 @@ import { useState } from "react";
 import { AddTodo } from "./components/AddToDo";
 // import { TodoItems } from "./components/TodoItems";
 import { TodoItems } from "./components/TodoItems";
+import { Message } from "./components/Message";
 
 function App() {
-  const intodoItems = [
-    {
-      name: "Do Homwork",
-      date: "2023-12-18",
-    },
-    {
-      name: "Buy milk",
-      date: "2023-12-18",
-    },
-    {
-      name: "Play game",
-      date: "2023-12-18",
-    },
-  ];
+  // const intodoItems = [
+  //   {
+  //     name: "Do Homwork",
+  //     date: "2023-12-18",
+  //   },
+  //   {
+  //     name: "Buy milk",
+  //     date: "2023-12-18",
+  //   },
+  //   {
+  //     name: "Play game",
+  //     date: "2023-12-18",
+  //   },
+  // ];
 
-  const [todoItems, setTodoItems] = useState(intodoItems);
+  const [todoItems, setTodoItems] = useState([]);
   const handleNewItem = (itemName, itemDate) => {
-    console.log(`NEW ITEM: ${itemName} DATE : ${itemDate}`);
+    console.log();
+    const newTodoItems = [
+      ...todoItems,
+      {
+        name: itemName,
+        date: itemDate,
+      },
+    ];
+    setTodoItems(newTodoItems);
   };
   return (
     <>
@@ -30,6 +39,8 @@ function App() {
           TODO APP
         </h1>
         <AddTodo onNewItem={handleNewItem} />
+        {todoItems.length === 0 && <Message />}
+
         <TodoItems todoItems={todoItems} />
       </div>
     </>
