@@ -1,33 +1,36 @@
+import { useState } from "react";
+import { AddTodo } from "./components/AddToDo";
+// import { TodoItems } from "./components/TodoItems";
+import { TodoItems } from "./components/TodoItems";
+
 function App() {
+  const intodoItems = [
+    {
+      name: "Do Homwork",
+      date: "2023-12-18",
+    },
+    {
+      name: "Buy milk",
+      date: "2023-12-18",
+    },
+    {
+      name: "Play game",
+      date: "2023-12-18",
+    },
+  ];
+
+  const [todoItems, setTodoItems] = useState(intodoItems);
+  const handleNewItem = (itemName, itemDate) => {
+    console.log(`NEW ITEM: ${itemName} DATE : ${itemDate}`);
+  };
   return (
     <>
-      <div className=" bg-[#6C5F5B] flex justify-center flex-col text-white max-w-[800px] mx-auto mt-28 p-5">
+      <div className="w-full h-screen bg-[#6C5F5B] flex justify-center flex-col text-white   p-5">
         <h1 className="flex justify-center items-center font-bold tracking-widest mb-10">
           TODO APP
         </h1>
-        <div className="flex justify-between mb-10">
-          <input
-            className="p-1 rounded-md px-[10rem] bg-[#4F4A45] outline-none"
-            type="text"
-            placeholder="Enter your task..."
-          />
-          <input
-            className="p-1 rounded-md bg-[#4F4A45] outline-none"
-            type="date"
-            placeholder=""
-          />
-          <button className="bg-[#33c329] px-4 rounded-md">Add</button>
-        </div>
-        <div className="flex justify-center flex-col ">
-          <div className="bg-[#4F4A45] mb-5 flex justify-between items-center p-4 rounded-md">
-            <p>Task 1</p>
-            <button className="bg-[#f6461e] px-2 rounded-md">Delete</button>
-          </div>
-          <div className="bg-[#4F4A45] mb-5 flex justify-between items-center p-4 rounded-md">
-            <p>Task 2</p>
-            <button className="bg-[#f6461e] px-2 rounded-md">Delete</button>
-          </div>
-        </div>
+        <AddTodo onNewItem={handleNewItem} />
+        <TodoItems todoItems={todoItems} />
       </div>
     </>
   );
