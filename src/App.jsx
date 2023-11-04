@@ -32,6 +32,12 @@ function App() {
     ];
     setTodoItems(newTodoItems);
   };
+
+  const handleDeleteItem = (todoItemName) => {
+    const newTodoItems = todoItems.filter((item) => item.name != todoItemName);
+    setTodoItems(newTodoItems);
+    console.log(`Item ${todoItemName} deleted.`);
+  };
   return (
     <>
       <div className="w-full h-screen bg-[#6C5F5B] flex justify-center flex-col text-white   p-5">
@@ -41,7 +47,7 @@ function App() {
         <AddTodo onNewItem={handleNewItem} />
         {todoItems.length === 0 && <Message />}
 
-        <TodoItems todoItems={todoItems} />
+        <TodoItems todoItems={todoItems} onDeleteClick={handleDeleteItem} />
       </div>
     </>
   );
